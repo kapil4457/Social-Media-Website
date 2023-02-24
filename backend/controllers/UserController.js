@@ -116,9 +116,10 @@ exports.getUserDetails = async (req, res, next) => {
 
 exports.updatePassword = async(req,res,next)=>{
     try{
-        const {oldPassword , confirmPassword , newPassword} = req.body;
-        const user = await User.findById(req.user.id).select("+password")
-        const isMatch = await user.comparePassword(oldPassword);
+        const {oldPassword , confirmPassword , newPassword , _id} = req.body;
+        // const user = await User.findById(req.user.id).select("+password")
+        const user = await User.findById(_id).select("+password")
+        const isMatch = await user.matchPassword(oldPassword);
             if(!isMatch){
                 return await res.status(201).send({success : false  , message : "Old Password is Incorrect"})
             }
