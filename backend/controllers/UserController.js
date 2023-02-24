@@ -144,8 +144,8 @@ exports.updatePassword = async(req,res,next)=>{
 exports.findUsers = async(req,res,next)=>{
 
     try{
-        const {keyword} = req.body;
-        const users =await User.find({$contains : {"name"  : keyword}})
+        const {keyword , _id} = req.body;
+        const users =await User.find({$and : [ {$ne : {_id : _id }}, {$contains : {name  : keyword } }]})
         return await res.status(200).send({success:true , users})
 
     }catch(err){
