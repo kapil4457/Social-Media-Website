@@ -76,10 +76,9 @@ exports.updateUser = async(req,res,next)=>{
         const userData = {
             name : req.body.name,
             email : req.body.email,
-            avatar : req.body.avatar
+            avatar : req.body.avatar,
         }
-
-        const user = await User.findByIdAndUpdate(req.user.id  , userData , {
+        const user = await User.findByIdAndUpdate(req.body._id  , userData , {
             new : true,
             runValidators : true,
             useFindAndModify : true
