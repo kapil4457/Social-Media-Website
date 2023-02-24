@@ -159,8 +159,8 @@ exports.findUsers = async(req,res,next)=>{
 exports.deleteAccount = async(req,res,next)=>{
 
     try{
-            const {id} = req.body;
-            await User.findByIdAndDelete(id);
+            const {_id} = req.body;
+            await User.findByIdAndDelete(_id);
 
             return await res.status(200).send({success : true , message : "Account Deleted Successfully"})
 
