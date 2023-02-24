@@ -37,6 +37,28 @@ friendRequestSchema.pre("save" , async function(next){
 })
 
 
+friendRequestSchema.methods.acceptFriendRequest = async function(){
+await User.findByIdAndUpdate(this.to , 
+    
+    {
+        $push : {following : this.from}
+    },
+    {
+        new : true
+    }
+    )
+await User.findByIdAndUpdate(this.from , 
+    
+    {
+        $push : {followers : this.to}
+    },
+    {
+        new : true
+    }
+    )
+}
+
+
 const FriendRequest = mongoose.model('FriendRequest' , friendRequestSchema)
 
 module.exports = FriendRequest;

@@ -1,5 +1,4 @@
 const User = require("../models/UserSchema");
-const Chat = require("../models/ChatSchema");
 const sendToken = require("../utils/jwtToken.js");
 
 
